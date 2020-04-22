@@ -1,0 +1,362 @@
+//////////////////////////// 1 exercício ///////////////////////////////////////
+package entrega1;
+
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+import javax.imageio.ImageIO;
+
+/**
+ *
+ * @author Gamelab1
+ */
+public class exc1 {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        
+        System.out.println("Entre com o diretório da imgem anjo + extensão do arquivo");
+        Scanner input = new Scanner(System.in);
+        String pathname = input.nextLine();
+        
+        BufferedImage image = null;
+        File f = null;
+
+        /*le a imagem*/
+        try
+        {
+            f = new File(pathname);
+            image = ImageIO.read(f);
+            System.out.println("Imagem lida com sucesso!");
+            
+            int width = image.getWidth();
+            int height = image.getHeight();
+            
+            //1 exercicio:
+            
+            
+            for(int i=0;i<width;i++){
+                for(int k=0;k<height;k++){
+                    Color color = new Color(image.getRGB(i, k));
+                    int r = color.getRed();
+                    int g = color.getGreen();
+                    int b = color.getBlue();
+                    
+                    r = (int) (0.7*r);
+                    g = (int) (0.15*g);
+                    b =(int) (0.15*b);
+                    
+                    
+                   
+                    Color newColor = new Color(r, g, b);
+                    
+                    image.setRGB(i, k, newColor.getRGB());
+                        
+    
+                    
+                }
+        
+           }
+            
+            try{
+            f = new File("/Users/Gamelab1/Downloads/AnjoVermelho.jpg");
+            ImageIO.write(image, "jpg", f);
+            System.out.println("Imagem do anjo vermelho salva com sucesso!");
+            }
+            catch(IOException e)
+            {
+                System.out.println(e);
+            }
+        }
+        catch(IOException e)
+        {
+            System.out.println(e);
+        }
+        
+    }
+    
+}
+//////////////////////////// exercício 2 ////////////////////////////////
+package entrega1;
+
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+import javax.imageio.ImageIO;
+
+/**
+ *
+ * @author Gamelab1
+ */
+public class exc2 {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        
+        System.out.println("Entre com o diretório da rosa + extensão do arquivo");
+        Scanner input = new Scanner(System.in);
+        String pathname = input.nextLine();
+        
+        BufferedImage image = null;
+        File f = null;
+
+        /*le a imagem*/
+        try
+        {
+            f = new File(pathname);
+            image = ImageIO.read(f);
+            System.out.println("Imagem lida com sucesso!");
+            
+            int width = image.getWidth();
+            int height = image.getHeight();
+            
+            //1 exercicio:
+            
+            
+            for(int i=0;i<width;i++){
+                for(int k=0;k<height;k++){
+                    Color color = new Color(image.getRGB(i, k));
+                    int r = color.getRed();
+                    int g = color.getGreen();
+                    int b = color.getBlue();
+                    
+                    int avg =(r+g+b)/3;
+                    
+                    Color newColor = new Color(avg, avg, avg);
+                    
+                    image.setRGB(i, k, newColor.getRGB());
+                    
+                }
+        
+           }
+            
+           try{
+            f = new File("/Users/Gamelab1/Downloads/RosaPB.png");
+            ImageIO.write(image, "jpg", f);
+            System.out.println("Imagem do rosa em preto e branco salva com sucesso!");
+            }
+            catch(IOException e)
+            {
+                System.out.println(e);
+            }
+        }
+        catch(IOException e)
+        {
+            System.out.println(e);
+        }
+
+        /*tamanho da imagem lida*/
+        
+        
+        
+        
+        
+        
+        
+    }
+    
+}
+///////////////////////////// exc 3 /////////////////////////////////////////
+package entrega1;
+
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+import javax.imageio.ImageIO;
+
+/**
+ *
+ * @author Gamelab1
+ */
+public class exc3 {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        
+        System.out.println("Entre com o diretório da imgem da rosa + extensão do arquivo");
+        Scanner input = new Scanner(System.in);
+        String pathname = input.nextLine();
+        
+        BufferedImage image = null;
+        File f = null;
+
+        /*le a imagem*/
+        try
+        {
+            f = new File(pathname);
+            image = ImageIO.read(f);
+            System.out.println("Imagem lida com sucesso!");
+            
+            int width = image.getWidth();
+            int height = image.getHeight();
+            
+            //1 exercicio:
+            
+            
+            for(int i=0;i<width;i++){
+                for(int k=0;k<height;k++){
+                    Color color = new Color(image.getRGB(i, k));
+                    float r = color.getRed();
+                    float g = color.getGreen();
+                    float b = color.getBlue();
+                    
+                    //int luminosity = (int) (0.21*r + 0.72*g + 0.07*b);
+                    // 0,21 R + 0,72 G + 0,07 B
+                    float difrg = r/g;
+                    float difrb = r/b;
+                    
+                    if(difrg<1.5){
+                        int avg = (int) ((r+g+b)/3);
+                        Color newColor = new Color(avg, avg, avg);
+                    
+                        image.setRGB(i, k, newColor.getRGB());
+                    }
+                    else if(difrb < 1.6){
+                        int avg = (int) ((r+g+b)/3);
+                        Color newColor = new Color(avg, avg, avg);
+                    
+                        image.setRGB(i, k, newColor.getRGB());
+                        
+                    } 
+                    
+                }
+        
+           }
+            
+            try{
+            f = new File("/Users/Gamelab1/Downloads/RosaVermelho.png");
+            ImageIO.write(image, "jpg", f);
+            System.out.println("Imagem da rosa vermelha salva com sucesso!");
+            }
+            catch(IOException e)
+            {
+                System.out.println(e);
+            }
+        }
+        catch(IOException e)
+        {
+            System.out.println(e);
+        }
+        
+        
+        
+        
+        
+        
+        
+    }
+    
+}
+///////////////////////// exc 4 //////////////////////////////
+package entrega1;
+
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+import javax.imageio.ImageIO;
+
+/**
+ *
+ * @author Gamelab1
+ */
+public class exc4 {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        
+        System.out.println("Entre com o diretório da imgem da rosa + extensão do arquivo");
+        Scanner input = new Scanner(System.in);
+        String pathname = input.nextLine();
+        
+        BufferedImage image = null;
+        File f = null;
+        
+
+        /*le a imagem*/
+        try
+        {
+            f = new File(pathname);
+            image = ImageIO.read(f);
+            System.out.println("Imagem lida com sucesso!");
+            ///Users/Gamelab1/Downloads/rose.png
+            int width = image.getWidth();
+            int height = image.getHeight();
+            
+            //1 exercicio:
+            
+            
+            for(int i=0;i<width;i++){
+                for(int k=0;k<height;k++){
+                    Color color = new Color(image.getRGB(i, k));
+                    float r = color.getRed();
+                    float g = color.getGreen();
+                    float b = color.getBlue();
+                    
+                    //int luminosity = (int) (0.21*r + 0.72*g + 0.07*b);
+                    // 0,21 R + 0,72 G + 0,07 B
+                    float difrg = r/g;
+                    float difrb = r/b;
+                    
+                    if(difrg<1.5){
+                        int avg = (int) ((r+g+b)/3);
+                        Color newColor = new Color(avg, avg, avg);
+                    
+                        image.setRGB(i, k, newColor.getRGB());
+                    }
+                    else if(difrb < 1.6){
+                        int avg = (int) ((r+g+b)/3);
+                        Color newColor = new Color(avg, avg, avg);
+                    
+                        image.setRGB(i, k, newColor.getRGB());
+                        
+                    }else{
+                        int red = (int) g;
+                        int blue = (int) b;
+                        int green = (int) r;
+                        Color nColor = new Color(red,green,blue);
+                        image.setRGB(i,k,nColor.getRGB());
+                    }
+                    
+                }
+                
+                
+        
+           }
+            f = new File("/Users/Gamelab1/Downloads/rose2.png");
+            ImageIO.write(image, "jpg", f);
+            System.out.println("Imagem da rosa verde salva com sucesso!");
+        }
+        catch(IOException e)
+        {
+            System.out.println(e);
+        }
+        
+        
+        
+        
+        
+        
+        
+    }
+    
+}

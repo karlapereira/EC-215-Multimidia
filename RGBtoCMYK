@@ -1,0 +1,73 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package entrega2;
+
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import static jdk.nashorn.internal.objects.NativeMath.max;
+
+/**
+ *
+ * @author aluno
+ */
+public class Entrega2 {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+       try{
+            File file = new File("C:\\Users\\aluno\\Downloads\\bus.jpeg");
+            BufferedImage image = ImageIO.read(file);
+            int width = image.getWidth();
+            int height = image.getHeight();
+            
+            for(int i=0;i<width;i++){
+                for(int k=0;k<height;k++){
+                    Color color = new Color(image.getRGB(i, k));
+                    float r = color.getRed() ;
+                    float g = color.getGreen() ;
+                    float b = color.getBlue();
+                    
+                    if(i==0 && k==0){
+                        System.out.println(r);
+                        System.out.println(g);
+                        System.out.println(b);
+                        System.out.println("///");
+                    }
+                    
+                    r=r/255;
+                    g=g/255;
+                    b=b/255;
+                    
+                    float k2 =  (float) 1.0 - Math.max(Math.max(r,g),b);
+
+                    float c = (1-r-k2) / (1-k2);
+                    float m = (1-g-k2) / (1-k2);
+                    float y =  (1-b-k2) / (1-k2);
+                    
+                    if(i==0 && k==0){
+                        System.out.println(c);
+                        System.out.println(m);
+                        System.out.println(y);
+                        System.out.println(k2);
+                    } 
+                    
+                   
+                    
+
+                }
+        
+           }
+        
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+    }
